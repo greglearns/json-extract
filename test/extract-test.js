@@ -1,24 +1,24 @@
 require('./test-helper')
 var expect = require('chai').expect
-var extract = require('..')
+var extract = require('../')
 
 describe('extract JSON values from a JSON string', function () {
-  var args
+  var key = "the_key"
+  var value = "the value"
+  var extractParameters
+  var obj
+
+  before(function () {
+    obj = {}
+    obj[key] = value
+  })
 
   beforeEach(function () {
-    var obj = {"the_key": "the_value"}
-    args = {json: JSON.stringify(obj), key: "the_key"}
+    extractParameters = {json: JSON.stringify(obj), key: key}
   })
 
 	it('given a key, it should extract a value', function () {
-		var key = "the_key"
-		var value = "the value"
-		var obj = {}
-		obj[key] = value
-		var json = JSON.stringify(obj)
-
-		var result = extract({json: json, key: key})
-		expect(result).to.equal(value)
+		expect(extract(extractParameters)).to.equal(value)
 	})
 
   it('throw an error if args is not passed', function () {
@@ -26,25 +26,27 @@ describe('extract JSON values from a JSON string', function () {
   })
 
   it('throw an error if args is not an object', function () {
-    function anObjectIsRequired () { extract('hi') }
-    expect(anObjectIsRequired).to.throw(Error)
+    expect(callExtractWith('not an object')).to.throw(Error)
   })
 
   it('throw an error if required arg "json" is missing', function () {
-    function jsonIsARequiredArg () {
-      delete args.json
-      extract(args)
-    }
-    expect(jsonIsARequiredArg).to.throw(Error)
+    expect(callExtractWithoutRequiredArg('json')).to.throw(Error)
   })
 
   it('throw an error if required arg "key" is missing', function () {
-    function jsonIsARequiredArg () {
-      delete args.key
-      extract(args)
-    }
-    expect(jsonIsARequiredArg).to.throw(Error)
+    expect(callExtractWithoutRequiredArg('key')).to.throw(Error)
   })
+
+  function callExtractWithoutRequiredArg (arg) {
+    delete extractParameters[arg]
+    return callExtractWith(extractParameters)
+  }
+
+  function callExtractWith(params) {
+    return function () {
+      extract(params)
+    }
+  }
 
 })
 

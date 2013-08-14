@@ -1,17 +1,29 @@
-var argv = require('optimist')
-    .demand(['file', 'key'])
-    .describe({file: 'path/to/a/json/file.json', key: 'the_json_key', json: 'output value as a JSON string'})
-    .usage('Extract a JSON value from a JSON file.')
-    .alias({f: 'file', k: 'key'}).argv
 var fs = require('fs')
+var optimist = require('optimist')
 var extract = require('./')
 
-function go () {
+var argv = optimist
+    .usage('Extract a JSON value from a JSON file.')
+    .demand(['file', 'key'])
+    .describe({
+      file: 'path/to/a/json/file.json',
+      key: 'the_json_key',
+      json: 'output value as a JSON string'
+    })
+    .alias({
+      f: 'file',
+      k: 'key'
+    }).argv
+
+function loadAndExtract () {
   var json = fs.readFileSync(argv.file, 'utf8')
-  var value = extract({json: json, key: argv.key})
-  var output = argv.json ? JSON.stringify(value) : value.toString()
-  process.stdout.write(output)
+  var value = extract({ json: json, key: argv.key })
+  return argv.json ? JSON.stringify(value) : value.toString()
 }
 
-go()
+function writeOutput(str) {
+  process.stdout.write(str)
+}
+
+writeOutput(loadAndExtract())
 

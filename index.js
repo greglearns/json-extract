@@ -2,11 +2,7 @@ var assert = require('assert')
 
 module.exports = function (args) {
 	validateArgs(args)
-	
-	var json = args.json
-	var key = args.key
-
-	return JSON.parse(json)[key]
+	return JSON.parse(args.json)[args.key]
 }
 
 function validateArgs (args) {
