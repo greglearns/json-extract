@@ -1,0 +1,5 @@
+{
+  "some_key": "a value",
+  "an_array": ["an", "array", "of", 5, "things", "with a comma, in it"],
+  "a_boolean": true
+}
