@@ -1,5 +1,7 @@
 # json-extract
 
+[![Build Status](https://travis-ci.org/greglearns/json-extract.png?branch=master)](https://travis-ci.org/greglearns/json-extract)
+
 Use Node.js to extract JSON values from a JSON file.
 
 # Usage
