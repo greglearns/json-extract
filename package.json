@@ -6,6 +6,7 @@
   "scripts": {
     "test": "make test"
   },
+  "bin": "cli.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/greglearns/json-extract.git"

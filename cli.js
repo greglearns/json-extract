@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var fs = require('fs')
 var optimist = require('optimist')
 var extract = require('./')
