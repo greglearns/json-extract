@@ -1,5 +1,12 @@
 {
   "some_key": "a value",
   "an_array": ["an", "array", "of", 5, "things", "with a comma, in it"],
-  "a_boolean": true
+  "a_boolean": true,
+  "nested": {
+    "value": "I am a nested value",
+    "nestedAgain": {
+      "value": 42,
+      "an_array": ["totally works", { "totally": "nested dude" }]
+    }
+  }
 }
