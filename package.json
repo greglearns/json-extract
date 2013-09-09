@@ -1,6 +1,6 @@
 {
   "name": "json-extract",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Extract JSON values from a JSON file.",
   "main": "index.js",
   "scripts": {
